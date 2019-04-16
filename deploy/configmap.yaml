@@ -1,0 +1,23 @@
+  ---
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+   name: jaeger-configuration
+   namespace: tracing
+   labels:
+     app: jaeger
+     app.kubernetes.io/name: jaeger
+ data:
+   span-storage-type: elasticsearch
+   collector: |
+     es:
+       server-urls: http://10.22.14.13:9200
+     collector:
+       zipkin:
+         http-port: 9411
+   query: |
+     es:
+       server-urls: http://10.22.14.13:9200
+   agent: |
+     collector:
+       host-port: "jaeger-collector:14267"
